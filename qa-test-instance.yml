@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name : Create EC2
+      ec2:
+        key_name: BESPIN_TEST_YHM
+        group: ['launch-wizard-13']
+        instance_type: t2.micro
+        image: ami-0a2778941dc6f2820
+        wait: yes
+        count: 1
+        instance_tags:
+          Name: test-qa-test
+        vpc_subnet_id: subnet-1af11756
+        region : ap-northeast-2
+        assign_public_ip: yes
+        volumes:
+          - device_name : /dev/xvda
+            volume_type: gp2
+            volume_size: 8
+      register : created_ec2
+
+    - name: Debug
+      debug:
+        msg: "{{ created_ec2 }}"
