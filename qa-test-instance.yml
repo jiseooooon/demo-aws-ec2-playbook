@@ -13,7 +13,7 @@
         wait: yes
         count: 1
         instance_tags:
-          Name: test-qa-test
+          Name: QA - Ansible 
         vpc_subnet_id: subnet-1af11756
         region : ap-northeast-2
         assign_public_ip: yes
